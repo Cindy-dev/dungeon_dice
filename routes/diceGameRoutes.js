@@ -13,3 +13,7 @@ diceGameRouter.get("/heroes", (req, res) => {
 });
 
 diceGameRouter.post("/battle/start",battleController.startBattle);
+
+diceGameRouter.post("/battle/round",battleController.roundBattle);
+
+diceGameRouter.post("/battle/reset", battleController.resetBattle)
