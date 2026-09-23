@@ -18,7 +18,7 @@ export function createBattleController(engine) {
     return res.status(200).json(result);
   }
 
-  function roundBattle(req, res) {
+  function resetBattle(req, res) {
     engine.resetBattle();
 
     return res.status(200).json({ message: "Battle reset." });
