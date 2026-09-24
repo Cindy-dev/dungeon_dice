@@ -1,6 +1,6 @@
-import { getDb } from "./db.js";
+import { getDB } from "./db.js";
 
 export async function getAllHeroes() {
-  const db = await getDb();
+  const db = await getDB();
   return db.all("SELECT * FROM heroes");
 }
