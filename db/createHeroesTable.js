@@ -1,5 +1,5 @@
 import { getDB } from "./db.js";
-import {heroes} from "../data/heroes.js";
+import { heroes } from "../data/heroes.js";
 
 async function createHeroesTable() {
   const db = await getDB();
@@ -10,7 +10,7 @@ async function createHeroesTable() {
       name TEXT NOT NULL,
       max_hp INTEGER NOT NULL,
       attack_power INTEGER NOT NULL,
-      defense_power INTEGER NOT NULL
+      defense_power INTEGER NOT NULL,
       image_url TEXT NOT NULL
     );
   `);
@@ -21,11 +21,13 @@ async function createHeroesTable() {
     return;
   }
 
-  await db.run(
-    "INSERT INTO heroes (name, max_hp, attack_power, defense_power, image_url) VALUES (?, ?, ?, ?, ?)",
-  );
+  // Loop through and pass both the SQL query AND the values together
   for (const hero of heroes) {
-    await db.run(hero.name, hero.maxHp, hero.attackPower, hero.defensePower, hero.imageUrl);
+    await db.run(
+      `INSERT INTO heroes (name, max_hp, attack_power, defense_power, image_url) 
+       VALUES (?, ?, ?, ?, ?)`,
+      [hero.name, hero.maxHp, hero.attackPower, hero.defensePower, hero.imageUrl]
+    );
   }
 
   console.log(`Seeded ${heroes.length} heroes.`);
