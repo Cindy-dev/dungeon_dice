@@ -18,7 +18,10 @@
     "or": "^0.2.0"
   },
   "dependencies": {
+    "dotenv": "^18.0.4",
+    "env": "^0.0.2",
     "express": "^5.2.1",
+    "express-session": "^1.19.0",
     "sqlite": "^5.1.1",
     "sqlite3": "^5.1.7"
   }
