@@ -1,12 +1,7 @@
-import sqlite3 from "sqlite3";
-import { open } from "sqlite";
-import path from "node:path";
+import { getDB } from "./db.js";
 
 async function createRunsTable() {
-  const db = await open({
-    filename: path.join("database.db"),
-    driver: sqlite3.Database,
-  });
+  const db = await getDB();
 
   await db.exec(`
     CREATE TABLE runs (
