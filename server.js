@@ -1,32 +1,36 @@
 import express from "express";
 import session from "express-session";
 import { diceGameRouter } from "./routes/diceGameRoutes.js";
-import dotenv from 'dotenv';
+import { authRouter } from "./routes/authRoutes.js";
+import dotenv from "dotenv";
 
-dotenv.config()
+dotenv.config();
 const app = express();
 const PORT = 8000;
-const secret = process.env.SESSION_SECRET
+const secret = process.env.SESSION_SECRET;
 app.use(express.json());
 
-app.use(session({
-  secret: secret,
-  resave: false,
-  saveUninitialized: false,
-  cookie: {
-    httpOnly: true,
-    secure: false,
-    sameSite: 'lax'
-  }
-}))
+app.use(
+  session({
+    secret: secret,
+    resave: false,
+    saveUninitialized: false,
+    cookie: {
+      httpOnly: true,
+      secure: false,
+      sameSite: "lax",
+    },
+  }),
+);
 
 app.use(express.static("public"));
 
-app.use("/api", diceGameRouter);
+app.use("/api/battle", diceGameRouter);
+app.use("/api/auth", authRouter);
 
-app.use((req, res)=>{
-  res.status(404).json({message: "Endpoint not found"})
-})
+app.use((req, res) => {
+  res.status(404).json({ message: "Endpoint not found" });
+});
 
 app
   .listen(PORT, () => {
