@@ -25,7 +25,7 @@ app.use(
 
 app.use(express.static("public"));
 
-app.use("/api/battle", diceGameRouter);
+app.use("/api", diceGameRouter);
 app.use("/api/auth", authRouter);
 
 app.use((req, res) => {

@@ -85,3 +85,20 @@ export async function logoutUser(req, res) {
     res.status(200).json({ message: "Logged out" });
   });
 }
+
+export async function getProfile(req, res) {
+  try {
+    if (!req.session.userId) {
+      return res.status(200).json({ isLoggedIn: false });
+    }
+    const db = await getDB();
+
+    const user = await db.get("SELECT * FROM users WHERE id = ?", [
+      req.session.userId,
+    ]);
+    res.status(200).json({ isLoggedIn: true, name: user.name });
+  } catch (err) {
+    console.error("Login error:", err.message);
+    res.status(500).json({ error: "Login failed. Please try again." });
+  }
+}

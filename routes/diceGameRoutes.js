@@ -15,8 +15,8 @@ diceGameRouter.get("/heroes", (req, res) => {
   res.status(200).json(heroes);
 });
 
-diceGameRouter.post("/start",battleController.startBattle);
+diceGameRouter.post("/battle/start",battleController.startBattle);
 
-diceGameRouter.post("/round",battleController.roundBattle);
+diceGameRouter.post("/battle/round",battleController.roundBattle);
 
-diceGameRouter.post("/reset", battleController.resetBattle)
+diceGameRouter.post("/battle/reset", battleController.resetBattle)
